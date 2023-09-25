@@ -74,9 +74,9 @@ export class HomepageComponent implements OnInit, AfterViewInit{
     var ctx = document.getElementById("myChart")as HTMLCanvasElement;
     var availableChart = Chart.getChart(ctx);
 
-    // if (availableChart) {
-    //   availableChart.destroy();
-    // }
+    if (availableChart) {
+      availableChart.destroy();
+    }
 
     var myPieChart = new Chart(ctx, {
         type: 'pie',
@@ -92,8 +92,8 @@ export class HomepageComponent implements OnInit, AfterViewInit{
 
     const svg = d3.select('#d3JSChart')
     .append('svg')
-    .attr('width','width')
-    .attr('height','height')
+    .attr('width',width)
+    .attr('height','700')
     .append('g')
     .attr('transform', `translate(${width / 2}, ${height / 2})`);
 
@@ -106,8 +106,8 @@ export class HomepageComponent implements OnInit, AfterViewInit{
     .value((d, i) => budgetValues[i]);
 
     const arc = d3.arc<any, d3.DefaultArcObject>()
-    .innerRadius(radius * 0.7)
-    .outerRadius(radius * 1.4);
+    .innerRadius(radius * 0.1)
+    .outerRadius(radius * 0.9);
 
     const outerArc = d3.arc<any, d3.DefaultArcObject>()
     .innerRadius(radius * 1.2)
@@ -161,7 +161,7 @@ export class HomepageComponent implements OnInit, AfterViewInit{
     polyline.transition().duration(1000)
     .attr('points', function(d: any) {
       var pos = outerArc.centroid(d);
-      pos[0] = radius * 1.002 * (midAngle(d) < Math.PI ? 1 : -1);
+      pos[0] = radius * 0.5 * (midAngle(d) < Math.PI ? 1 : -1);
       return `${arc.centroid(d)},${outerArc.centroid(d)},${pos[0]},${pos[1]}`;
     });
 
